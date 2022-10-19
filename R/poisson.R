@@ -1,0 +1,39 @@
+#' @keywords internal
+a <- function(phi) {
+  return(phi)
+}
+
+#' @keywords internal
+b <- function(theta) {
+  return(exp(theta))
+}
+
+#' @keywords internal
+c2 <- function(x, phi) {
+  out <- -log(factorial(x))
+  return(out)
+}
+
+#' @keywords internal
+link <- function(mu) {
+  return(log(mu))
+}
+
+#' @keywords internal
+calc_phi <- function() {
+  return(1)
+}
+
+#' The Poisson Distribution
+#'
+#' @inheritParams dnormalt
+#' @return dpoisalt gives the density
+#' @examples
+#' library(altForm)
+#'
+#' set.seed(1)
+#' x <- rpois(100, 1)
+#' dpoisalt(x, 1)
+#'
+#' @export
+dpoisalt <- create_pdf_exponential_form(a, b, c2, link, calc_phi, FALSE, 0)
