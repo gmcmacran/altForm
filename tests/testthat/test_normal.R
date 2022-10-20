@@ -2,6 +2,11 @@
 ###############################################
 # Density
 ###############################################
+test_that("Check structure.", {
+  expect_true(class(dnormalt) == "function")
+  expect_true(all(names(formals(dnormalt)) == c("x", "mu", "sigma", "log")))
+})
+
 for (mu in seq(-3, 3, .5)) {
   for (sigma in seq(1, 5, .5)) {
     set.seed(1)
@@ -38,6 +43,7 @@ test_that("mu input checking works", {
 test_that("sigma input checking works", {
   expect_error(dnormalt(x, 1, c(1, 2)), "Argument sigma must have length one.")
   expect_error(dnormalt(x, 1, "foo"), "Argument sigma must be numeric.")
+  expect_error(dnormalt(x, 1, -1), "sigma must be above 0.")
 })
 
 test_that("log input checking works", {

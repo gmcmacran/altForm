@@ -6,7 +6,7 @@ utils::globalVariables(c("x", "mu", "sigma", "log"))
 
 #' @keywords internal
 #' A function factory that returns pdfs
-create_pdf_exponential_form <- function(a, b, c2, link, calc_phi, hasNuisance, LB) {
+create_pdf_exponential_form <- function(a, b, c2, link, calc_phi, hasNuisance, XLB, XUB, MLB, MUB) {
   force(a)
   if (!inherits(a, "function")) {
     stop("Argument a must be a function.")
@@ -68,7 +68,7 @@ create_pdf_exponential_form <- function(a, b, c2, link, calc_phi, hasNuisance, L
   }
   args <- names(formals(calc_phi))
   if (length(args) > 2) {
-    stop("link has too many arguments.")
+    stop("calc_phi has too many arguments.")
   }
   rm(args)
 
@@ -79,12 +79,42 @@ create_pdf_exponential_form <- function(a, b, c2, link, calc_phi, hasNuisance, L
     stop("Argument hasNuisance must have length one.")
   }
 
-  force(LB)
-  if (!is.numeric(LB)) {
-    stop("Argument LB should be numeric.")
+  force(XLB)
+  if (!is.numeric(XLB)) {
+    stop("Argument XLB should be numeric.")
   }
-  if (length(LB) != 1) {
-    stop("Argument LB should have length one.")
+  if (length(XLB) != 1) {
+    stop("Argument XLB should have length one.")
+  }
+
+  force(XUB)
+  if (!is.numeric(XUB)) {
+    stop("Argument XUB should be numeric.")
+  }
+  if (length(XUB) != 1) {
+    stop("Argument XUB should have length one.")
+  }
+  if (XLB >= XUB) {
+    stop("Argument XLB should be less than XUB.")
+  }
+
+  force(MLB)
+  if (!is.numeric(MLB)) {
+    stop("Argument MLB should be numeric.")
+  }
+  if (length(MLB) != 1) {
+    stop("Argument MLB should have length one.")
+  }
+
+  force(MUB)
+  if (!is.numeric(MUB)) {
+    stop("Argument MUB should be numeric.")
+  }
+  if (length(MUB) != 1) {
+    stop("Argument MUB should have length one.")
+  }
+  if (MLB >= MUB) {
+    stop("Argument MLB should be less than MUB")
   }
 
   if (hasNuisance) {
@@ -97,8 +127,8 @@ create_pdf_exponential_form <- function(a, b, c2, link, calc_phi, hasNuisance, L
       if (!is.numeric(sigma)) {
         stop("Argument sigma must be numeric.")
       }
-      if (sigma <= LB) {
-        stop("sigma must be above 0")
+      if (sigma <= 0) {
+        stop("sigma must be above 0.")
       }
     })
 
@@ -119,8 +149,11 @@ create_pdf_exponential_form <- function(a, b, c2, link, calc_phi, hasNuisance, L
     if (!is.numeric(x)) {
       stop("Argument x must be numeric.")
     }
-    if (any(x < LB)) {
-      stop(paste("All elements in x must be greater than or equal to ", LB, sep = ""))
+    if (any(x < XLB)) {
+      stop(paste("All elements in x must be greater than or equal to ", XLB, sep = ""))
+    }
+    if (any(x > XUB)) {
+      stop(paste("All elements in x must be less than or equal to ", XUB, sep = ""))
     }
 
     if (length(mu) != 1) {
@@ -129,8 +162,11 @@ create_pdf_exponential_form <- function(a, b, c2, link, calc_phi, hasNuisance, L
     if (!is.numeric(mu)) {
       stop("Argument mu must be numeric.")
     }
-    if (mu < LB) {
-      stop(paste("Argument mu must be greater than or equal to ", LB, sep = ""))
+    if (mu <= MLB) {
+      stop(paste("Argument mu must be greater than ", MLB, sep = ""))
+    }
+    if (mu >= MUB) {
+      stop(paste("Argument mu must be less than ", MUB, sep = ""))
     }
 
     !!sdCheck
@@ -153,7 +189,7 @@ create_pdf_exponential_form <- function(a, b, c2, link, calc_phi, hasNuisance, L
     return(p)
   })
 
-  exec_globals <- list(a = a, b = b, c2 = c2, link = link, calc_phi = calc_phi, LB = LB)
+  exec_globals <- list(a = a, b = b, c2 = c2, link = link, calc_phi = calc_phi, XLB = XLB, XUB = XUB, MLB = MLB, MUB = MUB)
   exec_env <- rlang::new_environment(data = exec_globals, parent = rlang::base_env())
 
   f <- rlang::new_function(args, body, env = exec_env)

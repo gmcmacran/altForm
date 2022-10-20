@@ -3,6 +3,9 @@
 \name{dnormalt}
 \alias{dnormalt}
 \title{The Normal Distribution}
+\source{
+Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
+}
 \usage{
 dnormalt(x, mu, sigma, log = FALSE)
 }

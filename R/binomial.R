@@ -28,12 +28,13 @@ calc_phi <- function() {
 #'
 #' @inheritParams dnormalt
 #' @return dbinomalt gives the density
+#' @inherit dnormalt source
 #' @examples
 #' library(altForm)
 #'
 #' set.seed(1)
-#' x <- rbinom(100, 10, .5)
+#' x <- rbinom(100, 1, .5) # Only contains zeros and ones
 #' dbinomalt(x, .5)
 #'
 #' @export
-dbinomalt <- create_pdf_exponential_form(a, b, c2, link, calc_phi, FALSE, 0)
+dbinomalt <- create_pdf_exponential_form(a, b, c2, link, calc_phi, FALSE, 0, 1, 0, 1)

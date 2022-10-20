@@ -3,6 +3,9 @@
 \name{dbinomalt}
 \alias{dbinomalt}
 \title{The Binomial Distribution}
+\source{
+Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
+}
 \usage{
 dbinomalt(x, mu, log = FALSE)
 }
@@ -23,7 +26,7 @@ The Binomial Distribution
 library(altForm)
 
 set.seed(1)
-x <- rbinom(100, 10, .5)
+x <- rbinom(100, 1, .5) # Only contains zeros and ones
 dbinomalt(x, .5)
 
 }

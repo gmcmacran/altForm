@@ -2,7 +2,13 @@
 ###############################################
 # Density
 ###############################################
-for (mu in seq(.5, 3, .5)) {
+test_that("Check structure.", {
+  expect_true(class(dpoisalt) == "function")
+  expect_true(all(names(formals(dpoisalt)) == c("x", "mu", "log")))
+})
+
+mus <- c(.0001, seq(.5, 3, .1), 100, 142)
+for (mu in mus) {
   set.seed(1)
   x <- rpois(100, mu)
 
@@ -17,6 +23,7 @@ for (mu in seq(.5, 3, .5)) {
     expect_true(all(d3 == d4))
   })
 }
+rm(mus)
 
 ###############################################
 # Density Input checking
@@ -32,7 +39,8 @@ x <- rpois(100, .5)
 test_that("mu input checking works", {
   expect_error(dpoisalt(x, c(1, 2)), "Argument mu must have length one.")
   expect_error(dpoisalt(x, "foo"), "Argument mu must be numeric.")
-  expect_error(dpoisalt(x, -10), "Argument mu must be greater than or equal to 0")
+  expect_error(dpoisalt(x, -10), "Argument mu must be greater than 0")
+  expect_error(dpoisalt(x, 143), "Argument mu must be less than 143")
 })
 
 test_that("log input checking works", {

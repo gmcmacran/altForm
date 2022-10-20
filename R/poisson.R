@@ -28,6 +28,7 @@ calc_phi <- function() {
 #'
 #' @inheritParams dnormalt
 #' @return dpoisalt gives the density
+#' @inherit dnormalt source
 #' @examples
 #' library(altForm)
 #'
@@ -36,4 +37,4 @@ calc_phi <- function() {
 #' dpoisalt(x, 1)
 #'
 #' @export
-dpoisalt <- create_pdf_exponential_form(a, b, c2, link, calc_phi, FALSE, 0)
+dpoisalt <- create_pdf_exponential_form(a, b, c2, link, calc_phi, FALSE, 0, Inf, 0, 143) # 143 for numerical accuracy.

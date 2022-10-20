@@ -31,6 +31,7 @@ calc_phi <- function(sigma, mu) {
 #' @param sigma a number indicating the standard deviation.
 #' @param log logical; if TRUE, probabilities p are given as log(p).
 #' @return dnormalt gives the density
+#' @source Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
 #' @examples
 #' library(altForm)
 #'
@@ -39,4 +40,4 @@ calc_phi <- function(sigma, mu) {
 #' dnormalt(x, 0, 1)
 #'
 #' @export
-dnormalt <- create_pdf_exponential_form(a, b, c2, link, calc_phi, TRUE, -Inf)
+dnormalt <- create_pdf_exponential_form(a, b, c2, link, calc_phi, TRUE, -Inf, Inf, -Inf, Inf)

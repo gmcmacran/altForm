@@ -1,5 +1,6 @@
 # https://math.stackexchange.com/questions/3393102/proof-inverse-gaussian-distribution-belongs-to-the-exponential-family
 # help("dinvgauss")
+# https://www.sfu.ca/sasdoc/sashtml/insight/chap39/sect4.htm
 
 #' @keywords internal
 a <- function(phi) {
@@ -8,12 +9,13 @@ a <- function(phi) {
 
 #' @keywords internal
 b <- function(theta) {
-  return((2*theta)^.5)
+  return((2 * theta)^.5)
 }
 
 #' @keywords internal
 c2 <- function(x, phi) {
-  out <- (1/x) / (-2*phi) + (1/-2)*log(2*pi*x^3*phi)
+  out <- -1 / (2 * x * phi)
+  out <- out - (1 / 2) * (log(2 * pi * x^3 * phi))
   return(out)
 }
 
@@ -31,6 +33,7 @@ calc_phi <- function(sigma, mu) {
 #'
 #' @inheritParams dnormalt
 #' @return dnormalt gives the density
+#' @inherit dnormalt source
 #' @examples
 #' library(altForm)
 #'
@@ -39,4 +42,4 @@ calc_phi <- function(sigma, mu) {
 #' dinvgaussalt(x, 1, 1)
 #'
 #' @export
-dinvgaussalt <- create_pdf_exponential_form(a, b, c2, link, calc_phi, TRUE, .Machine$double.eps)
+dinvgaussalt <- create_pdf_exponential_form(a, b, c2, link, calc_phi, TRUE, .Machine$double.eps, Inf, 0, Inf)

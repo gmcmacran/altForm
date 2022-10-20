@@ -3,6 +3,9 @@
 \name{dinvgaussalt}
 \alias{dinvgaussalt}
 \title{The Inverse Gaussian Distribution}
+\source{
+Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
+}
 \usage{
 dinvgaussalt(x, mu, sigma, log = FALSE)
 }
