@@ -5,25 +5,25 @@ a <- function(phi) {
 
 #' @keywords internal
 b <- function(theta) {
-  return(-log(1/theta))
+  return(-log(1 / theta))
 }
 
 #' @keywords internal
 c2 <- function(x, phi) {
-  out <- (1 - phi)/phi*log(x)
-  out <- out - log(phi)/phi
-  out <- out - lgamma(1/phi)
+  out <- (1 - phi) / phi * log(x)
+  out <- out - log(phi) / phi
+  out <- out - lgamma(1 / phi)
   return(out)
 }
 
 #' @keywords internal
 link <- function(mu) {
-  return(1/mu)
+  return(1 / mu)
 }
 
 #' @keywords internal
 calc_phi <- function(sigma, mu) {
-  return(sigma^2/mu^2)
+  return(sigma^2 / mu^2)
 }
 
 #' The Inverse Gaussian Distribution
