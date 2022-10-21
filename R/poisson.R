@@ -10,7 +10,7 @@ b <- function(theta) {
 
 #' @keywords internal
 c2 <- function(x, phi) {
-  out <- -log(factorial(x))
+  out <- -lgamma(x + 1)
   return(out)
 }
 
