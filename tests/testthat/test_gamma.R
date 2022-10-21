@@ -1,13 +1,14 @@
 # Generalized linear models and extenstions
-ref_pdf <- function(x, mu, sigma, log=FALSE) {
-  phi <- sigma^2/mu^2
+ref_pdf <- function(x, mu, sigma, log = FALSE) {
+  phi <- sigma^2 / mu^2
 
-  out <- 1/(x*gamma(1/phi))
-  out <- out * (x/(mu*phi))^(1/phi)
-  out <- out * exp(-x/(mu*phi))
+  out <- 1 / (x * gamma(1 / phi))
+  out <- out * (x / (mu * phi))^(1 / phi)
+  out <- out * exp(-x / (mu * phi))
 
-  if (log)
+  if (log) {
     out <- log(out)
+  }
   return(out)
 }
 
