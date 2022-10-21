@@ -7,12 +7,14 @@
 Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
 }
 \usage{
-dbinomalt(x, mu, log = FALSE)
+dbinomalt(x, mu, size, log = FALSE)
 }
 \arguments{
 \item{x}{a numeric vector.}
 
 \item{mu}{a number indicating the mean.}
+
+\item{size}{number of trials (zero or more).}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 }
@@ -26,7 +28,7 @@ The Binomial Distribution
 library(altForm)
 
 set.seed(1)
-x <- rbinom(100, 1, .5) # Only contains zeros and ones
-dbinomalt(x, .5)
+x <- rbinom(100, 2, .5)
+dbinomalt(x, .5, 2)
 
 }
