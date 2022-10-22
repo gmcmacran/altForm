@@ -28,7 +28,7 @@ The Inverse Gaussian Distribution
 library(altForm)
 
 set.seed(1)
-x <- statmod::rinvgauss(n = 100, mean = 2, dispersion = 1)
+x <- statmod::rinvgauss(n = 10, mean = 2, dispersion = 1)
 dinvgaussalt(x, 1, 1)
 
 }

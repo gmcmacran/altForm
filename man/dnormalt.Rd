@@ -28,7 +28,7 @@ The Normal Distribution
 library(altForm)
 
 set.seed(1)
-x <- rnorm(100, 0, 1)
+x <- rnorm(10, 0, 1)
 dnormalt(x, 0, 1)
 
 }

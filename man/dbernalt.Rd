@@ -23,7 +23,7 @@ The Bernoulli Distribution
 library(altForm)
 
 set.seed(1)
-x <- rbinom(100, 1, .5)
-dbernalt(x, .5)
+x <- rbinom(10, 1, .25)
+dbernalt(x, .25)
 
 }

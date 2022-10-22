@@ -33,7 +33,7 @@ calc_phi <- function() {
 #' library(altForm)
 #'
 #' set.seed(1)
-#' x <- rpois(100, 1)
+#' x <- rpois(10, 1)
 #' dpoisalt(x, 1)
 #'
 #' @export

@@ -34,7 +34,7 @@ calc_phi <- function() {
 #' library(altForm)
 #'
 #' set.seed(1)
-#' x <- rnbinom(100, 7, .5)
+#' x <- rnbinom(10, 7, .5)
 #' dnbinomalt(x, .5, 7)
 #'
 #' @export
@@ -48,7 +48,7 @@ dnbinomalt <- create_pdf_exponential_form_with_size(a, b, c2, link, calc_phi, 0)
 #' library(altForm)
 #'
 #' set.seed(1)
-#' x <- rgeom(100, .5)
+#' x <- rgeom(10, .5)
 #' dgeomalt(x, .5)
 #'
 #' @export

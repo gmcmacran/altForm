@@ -28,7 +28,7 @@ The Negative Binomial Distribution
 library(altForm)
 
 set.seed(1)
-x <- rnbinom(100, 7, .5)
+x <- rnbinom(10, 7, .5)
 dnbinomalt(x, .5, 7)
 
 }

@@ -23,7 +23,7 @@ The Geometric Distribution
 library(altForm)
 
 set.seed(1)
-x <- rgeom(100, .5)
+x <- rgeom(10, .5)
 dgeomalt(x, .5)
 
 }

@@ -28,7 +28,7 @@ The Binomial Distribution
 library(altForm)
 
 set.seed(1)
-x <- rbinom(100, 2, .5)
+x <- rbinom(10, 2, .5)
 dbinomalt(x, .5, 2)
 
 }

@@ -28,7 +28,7 @@ The Inverse Gaussian Distribution
 library(altForm)
 
 set.seed(1)
-x <- rgamma(n = 100, shape = 2, rate = 1)
+x <- rgamma(n = 10, shape = 2, rate = 1)
 dgammaalt(x, 1, 1)
 
 }
