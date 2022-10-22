@@ -7,7 +7,7 @@ test_that("Check structure.", {
   expect_true(all(names(formals(dbinomalt)) == c("x", "mu", "size", "log")))
 })
 
-for (mu in seq(.01, .99, .03)) {
+for (mu in seq(.01, .99, .05)) {
   for (n in c(1, 3, 5, 7, 9, 500, 9999)) {
     set.seed(1)
     x <- rbinom(100, n, mu)
@@ -63,7 +63,7 @@ test_that("Check structure.", {
   expect_true(all(names(formals(dbernalt)) == c("x", "mu", "log")))
 })
 
-for (mu in seq(.01, .99, .03)) {
+for (mu in seq(.01, .99, .05)) {
   set.seed(1)
   x <- Rlab::rbern(100, mu)
 
