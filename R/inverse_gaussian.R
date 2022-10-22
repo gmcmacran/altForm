@@ -1,7 +1,3 @@
-# https://math.stackexchange.com/questions/3393102/proof-inverse-gaussian-distribution-belongs-to-the-exponential-family
-# help("dinvgauss")
-# https://www.sfu.ca/sasdoc/sashtml/insight/chap39/sect4.htm
-
 #' @keywords internal
 a <- function(phi) {
   return(-1 * phi)
