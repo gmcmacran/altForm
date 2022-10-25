@@ -2,9 +2,12 @@
 % Please edit documentation in R/binomial.R
 \name{dbernalt}
 \alias{dbernalt}
+\alias{pbernalt}
 \title{The Bernoulli Distribution}
 \usage{
 dbernalt(x, mu, log = FALSE)
+
+pbernalt(x, mu, log = FALSE)
 }
 \arguments{
 \item{x}{a numeric vector.}
@@ -25,5 +28,7 @@ library(altForm)
 set.seed(1)
 x <- rbinom(10, 1, .25)
 dbernalt(x, .25)
+
+pbernalt(x, .25)
 
 }

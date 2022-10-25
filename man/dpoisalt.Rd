@@ -2,12 +2,15 @@
 % Please edit documentation in R/poisson.R
 \name{dpoisalt}
 \alias{dpoisalt}
+\alias{ppoisalt}
 \title{The Poisson Distribution}
 \source{
 Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
 }
 \usage{
 dpoisalt(x, mu, log = FALSE)
+
+ppoisalt(q, mu, lower.tail = TRUE, log.p = FALSE)
 }
 \arguments{
 \item{x}{a numeric vector.}
@@ -15,6 +18,12 @@ dpoisalt(x, mu, log = FALSE)
 \item{mu}{a number indicating the mean.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{q}{a numeric vector.}
+
+\item{lower.tail}{logical; if TRUE (default),}
+
+\item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 }
 \value{
 dpoisalt gives the density
@@ -28,5 +37,7 @@ library(altForm)
 set.seed(1)
 x <- rpois(10, 1)
 dpoisalt(x, 1)
+
+ppoisalt(x, 1)
 
 }
