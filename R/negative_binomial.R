@@ -38,7 +38,7 @@ calc_phi <- function() {
 #' dnbinomalt(x, .5, 7)
 #'
 #' @export
-dnbinomalt <- create_pdf_exponential_form_with_size(a, b, c2, link, calc_phi, 0)
+dnbinomalt <- altForm:::create_pmf_exponential_form(a, b, c2, link, calc_phi, 0)
 
 #' The Geometric Distribution
 #'

@@ -198,8 +198,8 @@ create_pdf_exponential_form <- function(a, b, c2, link, calc_phi, hasNuisance, X
 }
 
 #' @keywords internal
-#' A function factory that returns exponential pdfs w/ size parameter (binomial and negative binomial)
-create_pdf_exponential_form_with_size <- function(a, b, c2, link, calc_phi, XLB) {
+#' A function factory that returns exponential pmfs w/ size parameter (binomial and negative binomial)
+create_pmf_exponential_form <- function(a, b, c2, link, calc_phi, XLB) {
   force(a)
   if (!inherits(a, "function")) {
     stop("Argument a must be a function.")
