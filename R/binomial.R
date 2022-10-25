@@ -38,7 +38,7 @@ calc_phi <- function() {
 #' dbinomalt(x, .5, 2)
 #'
 #' @export
-dbinomalt <- create_pdf_exponential_form_with_size(a, b, c2, link, calc_phi, 0)
+dbinomalt <- altForm:::create_pmf_exponential_form(a, b, c2, link, calc_phi, 0)
 
 #' The Bernoulli Distribution
 #'
