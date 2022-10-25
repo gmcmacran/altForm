@@ -2,12 +2,15 @@
 % Please edit documentation in R/normal.R
 \name{dnormalt}
 \alias{dnormalt}
-\title{The Normal Distribution}
+\alias{pnormalt}
+\title{The Normal Distribution.}
 \source{
 Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
 }
 \usage{
 dnormalt(x, mu, sigma, log = FALSE)
+
+pnormalt(q, mu, sigma, lower.tail = TRUE, log.p = FALSE)
 }
 \arguments{
 \item{x}{a numeric vector.}
@@ -17,12 +20,18 @@ dnormalt(x, mu, sigma, log = FALSE)
 \item{sigma}{a number indicating the standard deviation.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{q}{a numeric vector.}
+
+\item{lower.tail}{logical; if TRUE (default),}
+
+\item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 }
 \value{
-dnormalt gives the density
+dnormalt gives the density, pnorm gives the cumulative distribution function.
 }
 \description{
-The Normal Distribution
+The Normal Distribution.
 }
 \examples{
 library(altForm)
@@ -30,5 +39,7 @@ library(altForm)
 set.seed(1)
 x <- rnorm(10, 0, 1)
 dnormalt(x, 0, 1)
+
+pnormalt(x, 0, 1)
 
 }
