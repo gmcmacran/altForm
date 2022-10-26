@@ -2,12 +2,15 @@
 % Please edit documentation in R/negative_binomial.R
 \name{dnbinomalt}
 \alias{dnbinomalt}
+\alias{pnbinomalt}
 \title{The Negative Binomial Distribution}
 \source{
 Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
 }
 \usage{
 dnbinomalt(x, mu, size, log = FALSE)
+
+pnbinomalt(q, mu, size, lower.tail = TRUE, log.p = FALSE)
 }
 \arguments{
 \item{x}{a numeric vector.}
@@ -17,6 +20,12 @@ dnbinomalt(x, mu, size, log = FALSE)
 \item{size}{target for number of successful trials.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{q}{a numeric vector.}
+
+\item{lower.tail}{logical; if TRUE (default),}
+
+\item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 }
 \value{
 dnbinomalt gives the density
@@ -30,5 +39,7 @@ library(altForm)
 set.seed(1)
 x <- rnbinom(10, 7, .5)
 dnbinomalt(x, .5, 7)
+
+pnbinomalt(x, .5, 7)
 
 }
