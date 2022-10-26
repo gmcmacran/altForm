@@ -28,7 +28,7 @@ pnormalt(q, mu, sigma, lower.tail = TRUE, log.p = FALSE)
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 }
 \value{
-dnormalt gives the density, pnorm gives the cumulative distribution function.
+dnormalt gives the density, pnormalt gives the cumulative distribution function.
 }
 \description{
 The Normal Distribution.

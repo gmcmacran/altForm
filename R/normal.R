@@ -31,7 +31,7 @@ calc_phi <- function(sigma, mu) {
 #' @param sigma a number indicating the standard deviation.
 #' @param log logical; if TRUE, probabilities p are given as log(p).
 #' @param lower.tail logical; if TRUE (default),
-#' @return dnormalt gives the density, pnorm gives the cumulative distribution function.
+#' @return dnormalt gives the density, pnormalt gives the cumulative distribution function.
 #' @source Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
 #' @examples
 #' library(altForm)
