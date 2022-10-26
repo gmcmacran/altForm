@@ -2,12 +2,15 @@
 % Please edit documentation in R/gamma.R
 \name{dgammaalt}
 \alias{dgammaalt}
+\alias{pgammaalt}
 \title{The Inverse Gaussian Distribution}
 \source{
 Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
 }
 \usage{
 dgammaalt(x, mu, sigma, log = FALSE)
+
+pgammaalt(q, mu, sigma, lower.tail = TRUE, log.p = FALSE)
 }
 \arguments{
 \item{x}{a numeric vector.}
@@ -17,6 +20,12 @@ dgammaalt(x, mu, sigma, log = FALSE)
 \item{sigma}{a number indicating the standard deviation.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{q}{a numeric vector.}
+
+\item{lower.tail}{logical; if TRUE (default),}
+
+\item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 }
 \value{
 dgammaalt gives the density
@@ -30,5 +39,7 @@ library(altForm)
 set.seed(1)
 x <- rgamma(n = 10, shape = 2, rate = 1)
 dgammaalt(x, 1, 1)
+
+pgammaalt(x, 1, 1)
 
 }

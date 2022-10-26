@@ -38,5 +38,12 @@ calc_phi <- function(sigma, mu) {
 #' x <- rgamma(n = 10, shape = 2, rate = 1)
 #' dgammaalt(x, 1, 1)
 #'
+#' pgammaalt(x, 1, 1)
+#'
 #' @export
-dgammaalt <- create_pdf_exponential_form(a, b, c2, link, calc_phi, TRUE, .Machine$double.eps, Inf, 0, Inf)
+dgammaalt <- altForm:::create_pdf_exponential_form(a, b, c2, link, calc_phi, TRUE, .Machine$double.eps, Inf, 0, Inf)
+
+#' @rdname dgammaalt
+#' @inheritParams pnormalt
+#' @export
+pgammaalt <- altForm:::create_cdf_exponential_form(dgammaalt, .Machine$double.eps, Inf, 0, Inf)

@@ -1,5 +1,3 @@
-# https://www.sfu.ca/sasdoc/sashtml/insight/chap39/sect4.htm
-
 # fix check.
 # Not actually global.
 utils::globalVariables(c("x", "mu", "sigma", "log", "size"))

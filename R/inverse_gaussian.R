@@ -37,5 +37,12 @@ calc_phi <- function(sigma, mu) {
 #' x <- statmod::rinvgauss(n = 10, mean = 2, dispersion = 1)
 #' dinvgaussalt(x, 1, 1)
 #'
+#' pinvgaussalt(x, 1, 1)
+#'
 #' @export
-dinvgaussalt <- create_pdf_exponential_form(a, b, c2, link, calc_phi, TRUE, .Machine$double.eps, Inf, 0, Inf)
+dinvgaussalt <- altForm:::create_pdf_exponential_form(a, b, c2, link, calc_phi, TRUE, .Machine$double.eps, Inf, 0, Inf)
+
+#' @rdname dinvgaussalt
+#' @inheritParams pnormalt
+#' @export
+pinvgaussalt <- altForm:::create_cdf_exponential_form(dinvgaussalt, .Machine$double.eps, Inf, 0, Inf)

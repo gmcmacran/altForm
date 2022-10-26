@@ -1,0 +1,83 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# altForm
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+altForm provides alternative formulations of standard distributions. All functions are parameterized by mu. Sigma and size are included where appropriate. For some distributions, this is the typical parameterization (i.e. normal). For others, this parameterization is new (i. e. gamma). This package is a work in progress. At the moment, probability density functions and cumulative density functions are implemented and tested.
+
+* Bernoulli
+  + pdf
+  + cdf
+
+* Binomial
+  + pdf
+  + cdf
+  
+* Geometric
+  + pdf
+  + cdf
+  
+* Negative Binomial
+  + pdf
+  + cdf
+
+* Normal
+  + pdf
+  + cdf
+
+* Poisson 
+  + pdf
+  + cdf
+
+* Gamma
+  + pdf
+  + cdf
+  
+* Inverse Gaussian
+  + pdf
+  + cdf
+
+
+## Example
+
+Probability density calculations are done here.
+
+```{r example1}
+library(altForm)
+set.seed(1)
+x <- rgamma(n = 3, shape = 2, rate = 1)
+
+dgammaalt(x = x, mu = 1, sigma = 2)
+```
+
+
+Cumulative density calculations rely on numerical integration of pdf functions instead of closed form formulas.
+
+```{r example2}
+pgammaalt(q = x, mu = 1, sigma = 2)
+```
+
+
+## Installation
+
+You can install the development version of altForm from [GitHub](https://github.com/) with:
+
+```{r}
+# install.packages("devtools")
+# devtools::install_github("gmcmacran/altForm")
+```

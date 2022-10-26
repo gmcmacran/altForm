@@ -24,13 +24,14 @@ calc_phi <- function(sigma, mu) {
   return(sigma^2)
 }
 
-#' The Normal Distribution
+#' The Normal Distribution.
 #'
 #' @param x a numeric vector.
 #' @param mu a number indicating the mean.
 #' @param sigma a number indicating the standard deviation.
 #' @param log logical; if TRUE, probabilities p are given as log(p).
-#' @return dnormalt gives the density
+#' @param lower.tail logical; if TRUE (default),
+#' @return dnormalt gives the density, pnormalt gives the cumulative distribution function.
 #' @source Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
 #' @examples
 #' library(altForm)
@@ -39,5 +40,13 @@ calc_phi <- function(sigma, mu) {
 #' x <- rnorm(10, 0, 1)
 #' dnormalt(x, 0, 1)
 #'
+#' pnormalt(x, 0, 1)
+#'
 #' @export
-dnormalt <- create_pdf_exponential_form(a, b, c2, link, calc_phi, TRUE, -Inf, Inf, -Inf, Inf)
+dnormalt <- altForm:::create_pdf_exponential_form(a, b, c2, link, calc_phi, TRUE, -Inf, Inf, -Inf, Inf)
+
+#' @rdname dnormalt
+#' @param q a numeric vector.
+#' @param log.p logical; if TRUE, probabilities p are given as log(p).
+#' @export
+pnormalt <- altForm:::create_cdf_exponential_form(dnormalt, -Inf, Inf, -Inf, Inf)

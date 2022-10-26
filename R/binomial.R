@@ -37,22 +37,12 @@ calc_phi <- function() {
 #' x <- rbinom(10, 2, .5)
 #' dbinomalt(x, .5, 2)
 #'
+#' pbinomalt(x, .5, 2)
+#'
 #' @export
 dbinomalt <- altForm:::create_pmf_exponential_form(a, b, c2, link, calc_phi, 0)
 
-#' The Bernoulli Distribution
-#'
-#' @inheritParams dnormalt
-#' @return dbernalt gives the density
-#' @examples
-#' library(altForm)
-#'
-#' set.seed(1)
-#' x <- rbinom(10, 1, .25)
-#' dbernalt(x, .25)
-#'
+#' @rdname dbinomalt
+#' @inheritParams pnormalt
 #' @export
-dbernalt <- function(x, mu, log = FALSE) {
-  out <- dbinomalt(x, mu, 1, log)
-  return(out)
-}
+pbinomalt <- altForm:::create_cmf_exponential_form(dbinomalt, 0, Inf, 0, 1)

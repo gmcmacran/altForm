@@ -37,22 +37,12 @@ calc_phi <- function() {
 #' x <- rnbinom(10, 7, .5)
 #' dnbinomalt(x, .5, 7)
 #'
+#' pnbinomalt(x, .5, 7)
+#'
 #' @export
 dnbinomalt <- altForm:::create_pmf_exponential_form(a, b, c2, link, calc_phi, 0)
 
-#' The Geometric Distribution
-#'
-#' @inheritParams dnormalt
-#' @return dgeomalt gives the density
-#' @examples
-#' library(altForm)
-#'
-#' set.seed(1)
-#' x <- rgeom(10, .5)
-#' dgeomalt(x, .5)
-#'
+#' @rdname dnbinomalt
+#' @inheritParams pnormalt
 #' @export
-dgeomalt <- function(x, mu, log = FALSE) {
-  out <- dnbinomalt(x, mu, 1, log)
-  return(out)
-}
+pnbinomalt <- altForm:::create_cmf_exponential_form(dnbinomalt, 0, Inf, 0, 1)

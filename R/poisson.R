@@ -36,5 +36,13 @@ calc_phi <- function() {
 #' x <- rpois(10, 1)
 #' dpoisalt(x, 1)
 #'
+#' ppoisalt(x, 1)
+#'
 #' @export
-dpoisalt <- create_pdf_exponential_form(a, b, c2, link, calc_phi, FALSE, 0, Inf, 0, 143) # 143 for numerical accuracy.
+dpoisalt <- altForm:::create_pdf_exponential_form(a, b, c2, link, calc_phi, FALSE, 0, Inf, 0, 143) # 143 for numerical accuracy.
+
+
+#' @rdname dpoisalt
+#' @inheritParams pnormalt
+#' @export
+ppoisalt <- altForm:::create_cmf_exponential_form(dpoisalt, 0, Inf, 0, 143)
