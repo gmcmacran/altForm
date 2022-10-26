@@ -117,8 +117,6 @@ test_that("mu input checking works", {
 test_that("lower.tail input checking works", {
   expect_error(ppoisalt(q, 1, c(TRUE, FALSE)), "Argument lower.tail must have length one.")
   expect_error(ppoisalt(q, 1, "foo"), "Argument lower.tail must be logical.")
-  expect_error(ppoisalt(x, -10), "Argument mu must be greater than 0")
-  expect_error(ppoisalt(x, 143), "Argument mu must be less than 143")
 })
 
 test_that("log.p input checking works", {
