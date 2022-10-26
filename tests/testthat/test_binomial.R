@@ -56,48 +56,74 @@ test_that("log input checking works", {
 })
 
 ###############################################
-# Density
+# cdf
 ###############################################
 test_that("Check structure.", {
-  expect_true(class(dbernalt) == "function")
-  expect_true(all(names(formals(dbernalt)) == c("x", "mu", "log")))
+  expect_true(class(pbinomalt) == "function")
+  expect_true(all(names(formals(pbinomalt)) == c("q", "mu", "size", "lower.tail", "log.p")))
 })
 
 for (mu in seq(.01, .99, .05)) {
-  set.seed(1)
-  x <- Rlab::rbern(100, mu)
+  for (n in c(1, 3, 5, 7, 9, 500, 9999)) {
+    set.seed(1)
+    q <- rbinom(100, n, mu)
 
-  d1 <- round(dbernalt(x, mu), 10)
-  d2 <- round(Rlab::dbern(x, mu), 10)
+    d1 <- round(pbinomalt(q, mu, n), 10)
+    d2 <- round(pbinom(q, n, mu), 10)
 
-  d3 <- round(dbernalt(x, mu, TRUE), 10)
-  d4 <- round(Rlab::dbern(x, mu, TRUE), 10)
+    d3 <- round(pbinomalt(q, mu, n, TRUE, TRUE), 10)
+    d4 <- round(pbinom(q, n, mu, TRUE, TRUE), 10)
 
-  test_that("Test results of density", {
-    expect_equal(d1, d2)
-    expect_equal(d3, d4)
-  })
+    test_that("Test results of cdf", {
+      expect_equal(d1, d2)
+      expect_equal(d3, d4)
+    })
+  }
+}
+
+# Total area is 1.
+for (mu in seq(.01, .99, .05)) {
+  for (n in c(1, 3, 5, 7, 9, 500, 9999)) {
+    d1 <- pbinomalt(n, mu, n)
+
+    d3 <- pbinomalt(n, mu, n, TRUE, TRUE)
+
+    test_that("Test results of cdf", {
+      expect_equal(d1, 1)
+      expect_equal(d3, 0)
+    })
+  }
 }
 
 ###############################################
-# Density Input checking
+# cdf Input checking
 ###############################################
 test_that("x input checking works", {
-  expect_error(dbernalt(c()), "Argument x must have positive length.")
-  expect_error(dbernalt(rep("foo", 50)), "Argument x must be numeric.")
-  expect_error(dbernalt(rep(-10, 50)), "All elements in x must be greater than or equal to 0")
+  expect_error(pbinomalt(c()), "Argument q must have positive length.")
+  expect_error(pbinomalt(rep("foo", 50)), "Argument q must be numeric.")
+  expect_error(pbinomalt(rep(-10, 50)), "All elements in q must be greater than or equal to 0")
 })
 
 set.seed(1)
-x <- rbinom(100, 1, .5)
+q <- rbinom(100, 10, .5)
 test_that("mu input checking works", {
-  expect_error(dbernalt(x, c(1, 2)), "Argument mu must have length one.")
-  expect_error(dbernalt(x, "foo"), "Argument mu must be numeric.")
-  expect_error(dbernalt(x, 0), "Argument mu must be greater than zero.")
-  expect_error(dbernalt(x, 1), "Argument mu must be less than one.")
+  expect_error(pbinomalt(q, c(1, 2)), "Argument mu must have length one.")
+  expect_error(pbinomalt(q, "foo"), "Argument mu must be numeric.")
 })
 
-test_that("log input checking works", {
-  expect_error(dbernalt(x, .5, c(TRUE, FALSE)), "Argument log must have length one.")
-  expect_error(dbernalt(x, .5, "foo"), "Argument log must be logical.")
+test_that("size input checking works", {
+  expect_error(pbinomalt(q, .5, c(10, 20)), "Argument size must have length one.")
+  expect_error(pbinomalt(q, .5, "foo"), "Argument size must be numeric.")
+  expect_error(pbinomalt(q, .5, 0), "Argument size must be greater than 0.")
+  expect_error(pbinomalt(q, .5, 10000), "Argument size must be less than 10,000.")
+})
+
+test_that("lower.tail input checking works", {
+  expect_error(pbinomalt(q, .5, 10, c(TRUE, FALSE)), "Argument lower.tail must have length one.")
+  expect_error(pbinomalt(q, .5, 10, "foo"), "Argument lower.tail must be logical.")
+})
+
+test_that("log.p input checking works", {
+  expect_error(pbinomalt(q, .5, 10, TRUE, c(TRUE, FALSE)), "Argument log.p must have length one.")
+  expect_error(pbinomalt(q, .5, 10, TRUE, "foo"), "Argument log.p must be logical.")
 })

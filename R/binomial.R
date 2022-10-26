@@ -46,30 +46,3 @@ dbinomalt <- altForm:::create_pmf_exponential_form(a, b, c2, link, calc_phi, 0)
 #' @inheritParams pnormalt
 #' @export
 pbinomalt <- altForm:::create_cmf_exponential_form(dbinomalt, 0, Inf, 0, 1)
-
-#' The Bernoulli Distribution
-#'
-#' @inheritParams dnormalt
-#' @return dbernalt gives the density
-#' @examples
-#' library(altForm)
-#'
-#' set.seed(1)
-#' x <- rbinom(10, 1, .25)
-#' dbernalt(x, .25)
-#'
-#' pbernalt(x, .25)
-#'
-#' @export
-dbernalt <- function(x, mu, log = FALSE) {
-  out <- dbinomalt(x, mu, 1, log)
-  return(out)
-}
-
-#' @rdname dbernalt
-#' @inheritParams pnormalt
-#' @export
-pbernalt <- function(x, mu, log = FALSE) {
-  out <- pbinomalt(x, mu, 1, log)
-  return(out)
-}
