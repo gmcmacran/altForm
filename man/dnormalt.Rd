@@ -3,6 +3,7 @@
 \name{dnormalt}
 \alias{dnormalt}
 \alias{pnormalt}
+\alias{rnormalt}
 \title{The Normal Distribution.}
 \source{
 Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
@@ -11,6 +12,8 @@ Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensio
 dnormalt(x, mu, sigma, log = FALSE)
 
 pnormalt(q, mu, sigma, lower.tail = TRUE, log.p = FALSE)
+
+rnormalt(n, mu, sigma)
 }
 \arguments{
 \item{x}{a numeric vector.}
@@ -26,6 +29,8 @@ pnormalt(q, mu, sigma, lower.tail = TRUE, log.p = FALSE)
 \item{lower.tail}{logical; if TRUE (default),}
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{n}{number of observations. Must be length 1}
 }
 \value{
 dnormalt gives the density, pnormalt gives the cumulative distribution function.
@@ -37,7 +42,7 @@ The Normal Distribution.
 library(altForm)
 
 set.seed(1)
-x <- rnorm(10, 0, 1)
+x <- rnormalt(10, 0, 1)
 dnormalt(x, 0, 1)
 
 pnormalt(x, 0, 1)

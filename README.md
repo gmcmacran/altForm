@@ -9,10 +9,10 @@
 altForm provides alternative formulations of standard distributions. All
 functions are parameterized by mu. Sigma and size are included where
 appropriate. For some distributions, this is the typical
-parameterization (i.e. normal). For others, this parameterization is new
-(i. e. gamma). This package is a work in progress. At the moment,
-probability density functions and cumulative density functions are
-implemented and tested.
+parameterization (i.e. normal). For others, this parameterization is
+uncommon (i. e. gamma). This package is a work in progress. At the
+moment, probability density functions and cumulative density functions
+are implemented and tested.
 
 - Bernoulli
   - pdf

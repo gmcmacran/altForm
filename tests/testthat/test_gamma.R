@@ -20,6 +20,20 @@ test_that("Check structure.", {
   expect_true(all(names(formals(dgammaalt)) == c("x", "mu", "sigma", "log")))
 })
 
+# shape and rate are 1 -> mu and sigma are 1
+set.seed(1)
+x <- rgamma(n = 100, shape = 1, rate = 1)
+d1 <- round(dgammaalt(x, 1, 1), 10)
+d2 <- round(dgamma(x, 1, 1), 10)
+
+d3 <- round(dgammaalt(x, 1, 1, TRUE), 10)
+d4 <- round(dgamma(x, 1, 1, log = TRUE), 10)
+
+test_that("Test results of density", {
+  expect_equal(d1, d2)
+  expect_equal(d3, d4)
+})
+
 for (mu in seq(.5, 3, .5)) {
   for (sigma in seq(1, 5, .5)) {
     set.seed(1)
@@ -158,4 +172,50 @@ test_that("lower.tail input checking works", {
 test_that("log.p input checking works", {
   expect_error(pgammaalt(q, 1, 1, TRUE, c(TRUE, FALSE)), "Argument log.p must have length one.")
   expect_error(pgammaalt(q, 1, 1, TRUE, "foo"), "Argument log.p must be logical.")
+})
+
+###############################################
+# random number generator
+###############################################
+test_that("Check structure.", {
+  expect_true(class(rgammaalt) == "function")
+  expect_true(all(names(formals(rgammaalt)) == c("n", "mu", "sigma")))
+})
+
+for (mu in seq(1, 3, 1)) {
+  for (sigma in seq(1, 3, 1)) {
+    set.seed(1)
+    x <- rgammaalt(50000, mu, sigma)
+
+    xbar <- mean(x)
+    sd_x <- sd(x)
+
+    test_that("Test results of random generator", {
+      expect_equal(length(x), 50000)
+      expect_true(abs(mu - xbar) <= .1)
+      expect_true(abs(sigma - sd_x) <= .1)
+    })
+  }
+}
+
+###############################################
+# random number generator Input checking
+###############################################
+test_that("x input checking works", {
+  expect_error(rgammaalt(c()), "Argument n must have length one.")
+  expect_error(rgammaalt(c(5, 10)), "Argument n must have length one.")
+  expect_error(rgammaalt("foo"), "Argument n must be numeric.")
+  expect_error(rgammaalt(-10), "Argument n must be positive.")
+})
+
+test_that("mu input checking works", {
+  expect_error(rgammaalt(10, c(1, 2)), "Argument mu must have length one.")
+  expect_error(rgammaalt(10, "foo"), "Argument mu must be numeric.")
+  expect_error(rgammaalt(10, -1), "Argument mu must be positive.")
+})
+
+test_that("sigma input checking works", {
+  expect_error(rgammaalt(10, 1, c(1, 2)), "Argument sigma must have length one.")
+  expect_error(rgammaalt(10, 1, "foo"), "Argument sigma must be numeric.")
+  expect_error(rgammaalt(10, 1, -1), "sigma must be positive.")
 })
