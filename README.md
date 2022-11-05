@@ -7,63 +7,77 @@
 <!-- badges: end -->
 
 altForm provides alternative formulations of standard distributions. All
-functions are parameterized by mu. Sigma and size are included where
-appropriate. For some distributions, this is the typical
-parameterization (i.e. normal). For others, this parameterization is
-uncommon (i. e. gamma). This package is a work in progress. At the
-moment, probability density functions and cumulative density functions
-are implemented and tested.
+functions are parameterized by
+![\mu](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmu "\mu").
+![\sigma](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Csigma "\sigma")
+and size are included where appropriate. For some distributions, this is
+the typical parameterization (i.e. normal). For others, this
+parameterization is uncommon (i. e. gamma). All pdfs, pmfs, cdfs and
+cmfs are tested against the typical R functions.
 
 - Bernoulli
-  - pdf
-  - cdf
+  - pmf
+  - cmf
+  - random number generator
 - Binomial
-  - pdf
-  - cdf
+  - pmf
+  - cmf
+  - random number generator
 - Geometric
-  - pdf
-  - cdf
+  - pmf
+  - cmf
+  - random number generator
 - Negative Binomial
-  - pdf
-  - cdf
+  - pmf
+  - cmf
+  - random number generator
 - Normal
   - pdf
   - cdf
+  - random number generator
 - Poisson
-  - pdf
-  - cdf
+  - pmf
+  - cmf
+  - random number generator
 - Gamma
   - pdf
   - cdf
+  - random number generator
 - Inverse Gaussian
   - pdf
   - cdf
+  - random number generator
 
 ## Example
 
-Probability density calculations are done here.
+All random generators convert parameters and call R’s typical random
+number generators.
 
 ``` r
 library(altForm)
 set.seed(1)
-x <- rgamma(n = 3, shape = 2, rate = 1)
-
-dgammaalt(x = x, mu = 1, sigma = 2)
-#> [1] 0.18207321 0.03074991 0.03232136
+x <- rgammaalt(n = 3, mu = 2, sigma = 1)
 ```
 
-Cumulative density calculations rely on numerical integration of pdf
+All probability density functions rely on the exponential formulations.
+
+``` r
+dgammaalt(x = x, mu = 1, sigma = 2)
+#> [1] 0.12459060 0.03636324 0.03766401
+```
+
+All cumulative density calculations rely on numerical integration of pdf
 functions instead of closed form formulas.
 
 ``` r
 pgammaalt(q = x, mu = 1, sigma = 2)
-#> [1] 0.7155729 0.9200817 0.9166898
+#> [1] 0.7729674 0.9081785 0.9055018
 ```
 
 ## Installation
 
-You can install the development version of altForm from
-[GitHub](https://github.com/) with:
+There are no plans to submit to CRAN. You can install a stable version
+of altForm from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
