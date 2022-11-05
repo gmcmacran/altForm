@@ -68,7 +68,7 @@ All random generators convert parameters and call R's typical random number gene
 ```{r example1}
 library(altForm)
 set.seed(1)
-x <- rgammaalt(n = 3, mu = 2, sigma = 1)
+x <- rgammaalt(n = 3, mu = 1, sigma = 2)
 ```
 
 All probability density functions rely on the exponential formulations.

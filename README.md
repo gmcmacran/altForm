@@ -56,14 +56,14 @@ number generators.
 ``` r
 library(altForm)
 set.seed(1)
-x <- rgammaalt(n = 3, mu = 2, sigma = 1)
+x <- rgammaalt(n = 3, mu = 1, sigma = 2)
 ```
 
 All probability density functions rely on the exponential formulations.
 
 ``` r
 dgammaalt(x = x, mu = 1, sigma = 2)
-#> [1] 0.12459060 0.03636324 0.03766401
+#> [1] 2.80945630 0.01280777 0.17022078
 ```
 
 All cumulative density calculations rely on numerical integration of pdf
@@ -71,7 +71,7 @@ functions instead of closed form formulas.
 
 ``` r
 pgammaalt(q = x, mu = 1, sigma = 2)
-#> [1] 0.7729674 0.9081785 0.9055018
+#> [1] 0.3194150 0.9627359 0.7261375
 ```
 
 ## Installation
