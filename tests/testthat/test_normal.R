@@ -121,3 +121,48 @@ test_that("log.p input checking works", {
   expect_error(pnormalt(q, 1, 1, TRUE, c(TRUE, FALSE)), "Argument log.p must have length one.")
   expect_error(pnormalt(q, 1, 1, TRUE, "foo"), "Argument log.p must be logical.")
 })
+
+###############################################
+# random number generator
+###############################################
+test_that("Check structure.", {
+  expect_true(class(rnormalt) == "function")
+  expect_true(all(names(formals(rnormalt)) == c("n", "mu", "sigma")))
+})
+
+for (mu in seq(-1, 1, 1)) {
+  for (sigma in seq(1, 3, 1)) {
+    set.seed(1)
+    x <- rnormalt(50000, mu, sigma)
+
+    xbar <- mean(x)
+    sd_x <- sd(x)
+
+    test_that("Test results of random generator", {
+      expect_equal(length(x), 50000)
+      expect_true(abs(mu - xbar) <= .1)
+      expect_true(abs(sigma - sd_x) <= .1)
+    })
+  }
+}
+
+###############################################
+# random number generator Input checking
+###############################################
+test_that("x input checking works", {
+  expect_error(rnormalt(c()), "Argument n must have length one.")
+  expect_error(rnormalt(c(5, 10)), "Argument n must have length one.")
+  expect_error(rnormalt("foo"), "Argument n must be numeric.")
+  expect_error(rnormalt(-10), "Argument n must be positive.")
+})
+
+test_that("mu input checking works", {
+  expect_error(rnormalt(10, c(1, 2)), "Argument mu must have length one.")
+  expect_error(rnormalt(10, "foo"), "Argument mu must be numeric.")
+})
+
+test_that("sigma input checking works", {
+  expect_error(rnormalt(10, 1, c(1, 2)), "Argument sigma must have length one.")
+  expect_error(rnormalt(10, 1, "foo"), "Argument sigma must be numeric.")
+  expect_error(rnormalt(10, 1, -1), "sigma must be positive.")
+})

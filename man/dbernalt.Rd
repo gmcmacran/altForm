@@ -3,11 +3,14 @@
 \name{dbernalt}
 \alias{dbernalt}
 \alias{pbernalt}
+\alias{rbernalt}
 \title{The Bernoulli Distribution}
 \usage{
 dbernalt(x, mu, log = FALSE)
 
 pbernalt(q, mu, lower.tail = TRUE, log.p = FALSE)
+
+rbernalt(n, mu)
 }
 \arguments{
 \item{x}{a numeric vector.}
@@ -21,6 +24,8 @@ pbernalt(q, mu, lower.tail = TRUE, log.p = FALSE)
 \item{lower.tail}{logical; if TRUE (default),}
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{n}{number of observations. Must be length 1}
 }
 \value{
 dbernalt gives the density
@@ -32,7 +37,8 @@ The Bernoulli Distribution
 library(altForm)
 
 set.seed(1)
-x <- rbinom(10, 1, .25)
+x <- rbernalt(10, .25)
+
 dbernalt(x, .25)
 
 pbernalt(x, .25)

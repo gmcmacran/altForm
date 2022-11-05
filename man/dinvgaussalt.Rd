@@ -3,6 +3,7 @@
 \name{dinvgaussalt}
 \alias{dinvgaussalt}
 \alias{pinvgaussalt}
+\alias{rinvgaussalt}
 \title{The Inverse Gaussian Distribution}
 \source{
 Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
@@ -11,6 +12,8 @@ Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensio
 dinvgaussalt(x, mu, sigma, log = FALSE)
 
 pinvgaussalt(q, mu, sigma, lower.tail = TRUE, log.p = FALSE)
+
+rinvgaussalt(n, mu, sigma)
 }
 \arguments{
 \item{x}{a numeric vector.}
@@ -26,6 +29,8 @@ pinvgaussalt(q, mu, sigma, lower.tail = TRUE, log.p = FALSE)
 \item{lower.tail}{logical; if TRUE (default),}
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{n}{number of observations. Must be length 1}
 }
 \value{
 dnormalt gives the density
@@ -37,9 +42,10 @@ The Inverse Gaussian Distribution
 library(altForm)
 
 set.seed(1)
-x <- statmod::rinvgauss(n = 10, mean = 2, dispersion = 1)
-dinvgaussalt(x, 1, 1)
+x <- rinvgaussalt(10, 2, 3)
 
-pinvgaussalt(x, 1, 1)
+dinvgaussalt(x, 2, 3)
+
+pinvgaussalt(x, 2, 3)
 
 }

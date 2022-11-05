@@ -127,3 +127,49 @@ test_that("log.p input checking works", {
   expect_error(pbinomalt(q, .5, 10, TRUE, c(TRUE, FALSE)), "Argument log.p must have length one.")
   expect_error(pbinomalt(q, .5, 10, TRUE, "foo"), "Argument log.p must be logical.")
 })
+
+###############################################
+# random number generator
+###############################################
+test_that("Check structure.", {
+  expect_true(class(rbinomalt) == "function")
+  expect_true(all(names(formals(rbinomalt)) == c("n", "mu", "size")))
+})
+
+for (mu in seq(.01, .99, .05)) {
+  for (size in c(2, 5, 10)) {
+    set.seed(1)
+    x <- rbinomalt(50000, mu, size)
+
+    xbar <- mean(x)
+
+    test_that("Test results of random generator", {
+      expect_equal(length(x), 50000)
+      expect_true(abs(mu * size - xbar) <= .1)
+    })
+  }
+}
+
+###############################################
+# random number generator Input checking
+###############################################
+test_that("x input checking works", {
+  expect_error(rbinomalt(c()), "Argument n must have length one.")
+  expect_error(rbinomalt(c(5, 10)), "Argument n must have length one.")
+  expect_error(rbinomalt("foo"), "Argument n must be numeric.")
+  expect_error(rbinomalt(-10), "Argument n must be positive.")
+})
+
+test_that("mu input checking works", {
+  expect_error(rbinomalt(10, c(1, 2)), "Argument mu must have length one.")
+  expect_error(rbinomalt(10, "foo"), "Argument mu must be numeric.")
+  expect_error(rbinomalt(10, 0), "Argument mu must be greater than zero.")
+  expect_error(rbinomalt(10, 1), "Argument mu must be less than one.")
+})
+
+test_that("size input checking works", {
+  expect_error(rbinomalt(10, .5, c(1, 2)), "Argument size must have length one.")
+  expect_error(rbinomalt(10, .5, "foo"), "Argument size must be numeric.")
+  expect_error(rbinomalt(10, .5, 0), "Argument size must be greater than 0.")
+  expect_error(rbinomalt(10, .5, 10000), "Argument size must be less than 10,000.")
+})

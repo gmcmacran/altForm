@@ -3,6 +3,7 @@
 \name{dgammaalt}
 \alias{dgammaalt}
 \alias{pgammaalt}
+\alias{rgammaalt}
 \title{The Inverse Gaussian Distribution}
 \source{
 Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
@@ -11,6 +12,8 @@ Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensio
 dgammaalt(x, mu, sigma, log = FALSE)
 
 pgammaalt(q, mu, sigma, lower.tail = TRUE, log.p = FALSE)
+
+rgammaalt(n, mu, sigma)
 }
 \arguments{
 \item{x}{a numeric vector.}
@@ -26,6 +29,8 @@ pgammaalt(q, mu, sigma, lower.tail = TRUE, log.p = FALSE)
 \item{lower.tail}{logical; if TRUE (default),}
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{n}{number of observations. Must be length 1}
 }
 \value{
 dgammaalt gives the density
@@ -37,9 +42,10 @@ The Inverse Gaussian Distribution
 library(altForm)
 
 set.seed(1)
-x <- rgamma(n = 10, shape = 2, rate = 1)
-dgammaalt(x, 1, 1)
+x <- rgammaalt(10, 3, 4)
 
-pgammaalt(x, 1, 1)
+dgammaalt(x, 3, 4)
+
+pgammaalt(x, 3, 4)
 
 }

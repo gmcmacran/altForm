@@ -33,7 +33,8 @@ calc_phi <- function() {
 #' library(altForm)
 #'
 #' set.seed(1)
-#' x <- rpois(10, 1)
+#' x <- rpoisalt(10, 1)
+#'
 #' dpoisalt(x, 1)
 #'
 #' ppoisalt(x, 1)
@@ -46,3 +47,30 @@ dpoisalt <- altForm:::create_pdf_exponential_form(a, b, c2, link, calc_phi, FALS
 #' @inheritParams pnormalt
 #' @export
 ppoisalt <- altForm:::create_cmf_exponential_form(dpoisalt, 0, Inf, 0, 143)
+
+#' @rdname dpoisalt
+#' @param n number of observations. Must be length 1
+#' @export
+rpoisalt <- function(n, mu) {
+  if (length(n) != 1) {
+    stop("Argument n must have length one.")
+  }
+  if (!is.numeric(n)) {
+    stop("Argument n must be numeric.")
+  }
+  if (n <= 0) {
+    stop("Argument n must be positive.")
+  }
+  if (length(mu) != 1) {
+    stop("Argument mu must have length one.")
+  }
+  if (!is.numeric(mu)) {
+    stop("Argument mu must be numeric.")
+  }
+  if (mu < .Machine$double.eps) {
+    stop("Argument mu must be positive.")
+  }
+
+  out <- stats::rpois(n = n, lambda = mu)
+  return(out)
+}
