@@ -3,6 +3,7 @@
 \name{dpoisalt}
 \alias{dpoisalt}
 \alias{ppoisalt}
+\alias{rpoisalt}
 \title{The Poisson Distribution}
 \source{
 Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
@@ -11,6 +12,8 @@ Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensio
 dpoisalt(x, mu, log = FALSE)
 
 ppoisalt(q, mu, lower.tail = TRUE, log.p = FALSE)
+
+rpoisalt(n, mu)
 }
 \arguments{
 \item{x}{a numeric vector.}
@@ -24,6 +27,8 @@ ppoisalt(q, mu, lower.tail = TRUE, log.p = FALSE)
 \item{lower.tail}{logical; if TRUE (default),}
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{n}{number of observations. Must be length 1}
 }
 \value{
 dpoisalt gives the density
@@ -35,7 +40,8 @@ The Poisson Distribution
 library(altForm)
 
 set.seed(1)
-x <- rpois(10, 1)
+x <- rpoisalt(10, 1)
+
 dpoisalt(x, 1)
 
 ppoisalt(x, 1)

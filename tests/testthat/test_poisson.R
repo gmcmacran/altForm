@@ -123,3 +123,39 @@ test_that("log.p input checking works", {
   expect_error(ppoisalt(q, 1, TRUE, c(TRUE, FALSE)), "Argument log.p must have length one.")
   expect_error(ppoisalt(q, 1, TRUE, "foo"), "Argument log.p must be logical.")
 })
+
+###############################################
+# random number generator
+###############################################
+test_that("Check structure.", {
+  expect_true(class(rpoisalt) == "function")
+  expect_true(all(names(formals(rpoisalt)) == c("n", "mu")))
+})
+
+for (mu in seq(.25, 1.25, .25)) {
+  set.seed(1)
+  x <- rpoisalt(50000, mu)
+
+  xbar <- mean(x)
+
+  test_that("Test results of random generator", {
+    expect_equal(length(x), 50000)
+    expect_true(abs(mu - xbar) <= .1)
+  })
+}
+
+###############################################
+# random number generator Input checking
+###############################################
+test_that("x input checking works", {
+  expect_error(rpoisalt(c()), "Argument n must have length one.")
+  expect_error(rpoisalt(c(5, 10)), "Argument n must have length one.")
+  expect_error(rpoisalt("foo"), "Argument n must be numeric.")
+  expect_error(rpoisalt(-10), "Argument n must be positive.")
+})
+
+test_that("mu input checking works", {
+  expect_error(rpoisalt(10, c(1, 2)), "Argument mu must have length one.")
+  expect_error(rpoisalt(10, "foo"), "Argument mu must be numeric.")
+  expect_error(rpoisalt(10, 0), "Argument mu must be positive.")
+})

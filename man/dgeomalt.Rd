@@ -3,11 +3,14 @@
 \name{dgeomalt}
 \alias{dgeomalt}
 \alias{pgeomaltalt}
+\alias{rgeomalt}
 \title{The Geometric Distribution}
 \usage{
 dgeomalt(x, mu, log = FALSE)
 
 pgeomaltalt(q, mu, lower.tail = TRUE, log.p = FALSE)
+
+rgeomalt(n, mu)
 }
 \arguments{
 \item{x}{a numeric vector.}
@@ -21,6 +24,8 @@ pgeomaltalt(q, mu, lower.tail = TRUE, log.p = FALSE)
 \item{lower.tail}{logical; if TRUE (default),}
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{n}{number of observations. Must be length 1}
 }
 \value{
 dgeomalt gives the density
@@ -32,7 +37,8 @@ The Geometric Distribution
 library(altForm)
 
 set.seed(1)
-x <- rgeom(10, .5)
+x <- rgeomalt(10, .5)
+
 dgeomalt(x, .5)
 
 pgeomaltalt(x, .5)

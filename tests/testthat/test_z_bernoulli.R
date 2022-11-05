@@ -108,3 +108,40 @@ test_that("log.p input checking works", {
   expect_error(pbernalt(q, .5, TRUE, c(TRUE, FALSE)), "Argument log.p must have length one.")
   expect_error(pbernalt(q, .5, TRUE, "foo"), "Argument log.p must be logical.")
 })
+
+###############################################
+# random number generator
+###############################################
+test_that("Check structure.", {
+  expect_true(class(rbernalt) == "function")
+  expect_true(all(names(formals(rbernalt)) == c("n", "mu")))
+})
+
+for (mu in seq(.01, .99, .05)) {
+  set.seed(1)
+  x <- rbernalt(50000, mu)
+
+  xbar <- mean(x)
+
+  test_that("Test results of random generator", {
+    expect_equal(length(x), 50000)
+    expect_true(abs(mu - xbar) <= .1)
+  })
+}
+
+###############################################
+# random number generator Input checking
+###############################################
+test_that("x input checking works", {
+  expect_error(rbernalt(c()), "Argument n must have length one.")
+  expect_error(rbernalt(c(5, 10)), "Argument n must have length one.")
+  expect_error(rbernalt("foo"), "Argument n must be numeric.")
+  expect_error(rbernalt(-10), "Argument n must be positive.")
+})
+
+test_that("mu input checking works", {
+  expect_error(rbernalt(10, c(1, 2)), "Argument mu must have length one.")
+  expect_error(rbernalt(10, "foo"), "Argument mu must be numeric.")
+  expect_error(rbernalt(10, 0), "Argument mu must be greater than zero.")
+  expect_error(rbernalt(10, 1), "Argument mu must be less than one.")
+})

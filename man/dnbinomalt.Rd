@@ -3,6 +3,7 @@
 \name{dnbinomalt}
 \alias{dnbinomalt}
 \alias{pnbinomalt}
+\alias{rnbinomalt}
 \title{The Negative Binomial Distribution}
 \source{
 Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
@@ -11,6 +12,8 @@ Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensio
 dnbinomalt(x, mu, size, log = FALSE)
 
 pnbinomalt(q, mu, size, lower.tail = TRUE, log.p = FALSE)
+
+rnbinomalt(n, mu, size)
 }
 \arguments{
 \item{x}{a numeric vector.}
@@ -26,6 +29,8 @@ pnbinomalt(q, mu, size, lower.tail = TRUE, log.p = FALSE)
 \item{lower.tail}{logical; if TRUE (default),}
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{n}{number of observations. Must be length 1}
 }
 \value{
 dnbinomalt gives the density
@@ -37,7 +42,8 @@ The Negative Binomial Distribution
 library(altForm)
 
 set.seed(1)
-x <- rnbinom(10, 7, .5)
+x <- rnbinomalt(10, .5, 7)
+
 dnbinomalt(x, .5, 7)
 
 pnbinomalt(x, .5, 7)

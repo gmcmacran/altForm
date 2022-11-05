@@ -6,7 +6,8 @@
 #' library(altForm)
 #'
 #' set.seed(1)
-#' x <- rgeom(10, .5)
+#' x <- rgeomalt(10, .5)
+#'
 #' dgeomalt(x, .5)
 #'
 #' pgeomaltalt(x, .5)
@@ -22,5 +23,13 @@ dgeomalt <- function(x, mu, log = FALSE) {
 #' @export
 pgeomaltalt <- function(q, mu, lower.tail = TRUE, log.p = FALSE) {
   out <- pnbinomalt(q, mu, 1, lower.tail, log.p)
+  return(out)
+}
+
+#' @rdname dgeomalt
+#' @param n number of observations. Must be length 1
+#' @export
+rgeomalt <- function(n, mu) {
+  out <- rnbinomalt(n, mu, 1)
   return(out)
 }
