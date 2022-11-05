@@ -43,6 +43,7 @@ library(altForm)
 
 set.seed(1)
 x <- rinvgaussalt(10, 2, 3)
+
 dinvgaussalt(x, 2, 3)
 
 pinvgaussalt(x, 2, 3)

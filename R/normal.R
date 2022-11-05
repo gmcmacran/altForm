@@ -38,6 +38,7 @@ calc_phi <- function(sigma, mu) {
 #'
 #' set.seed(1)
 #' x <- rnormalt(10, 0, 1)
+#'
 #' dnormalt(x, 0, 1)
 #'
 #' pnormalt(x, 0, 1)

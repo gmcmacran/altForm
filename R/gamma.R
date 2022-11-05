@@ -36,6 +36,7 @@ calc_phi <- function(sigma, mu) {
 #'
 #' set.seed(1)
 #' x <- rgammaalt(10, 3, 4)
+#'
 #' dgammaalt(x, 3, 4)
 #'
 #' pgammaalt(x, 3, 4)
