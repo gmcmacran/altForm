@@ -70,6 +70,9 @@ rpoisalt <- function(n, mu) {
   if (mu < .Machine$double.eps) {
     stop("Argument mu must be positive.")
   }
+  if (mu >= 143) {
+    stop("Argument mu must be less than 143.")
+  }
 
   out <- stats::rpois(n = n, lambda = mu)
   return(out)

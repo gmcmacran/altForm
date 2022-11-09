@@ -70,9 +70,13 @@ for (mu in seq(-1, 1, 1)) {
     d3 <- round(pnormalt(q, mu, sigma, TRUE, TRUE), 10)
     d4 <- round(pnorm(q, mu, sigma, TRUE, TRUE), 10)
 
+    d5 <- round(pnormalt(q, mu, sigma, FALSE), 10)
+    d6 <- round(pnorm(q, mu, sigma, FALSE), 10)
+
     test_that("Test results of cdf", {
       expect_equal(d1, d2)
       expect_equal(d3, d4)
+      expect_equal(d5, d6)
     })
   }
 }
@@ -94,7 +98,7 @@ for (mu in seq(-1, 1, 1)) {
 ###############################################
 # cdf Input checking
 ###############################################
-test_that("x input checking works", {
+test_that("q input checking works", {
   expect_error(pnormalt(c()), "Argument q must have positive length.")
   expect_error(pnormalt(rep("foo", 50)), "Argument q must be numeric.")
 })
@@ -149,11 +153,11 @@ for (mu in seq(-1, 1, 1)) {
 ###############################################
 # random number generator Input checking
 ###############################################
-test_that("x input checking works", {
+test_that("n input checking works", {
   expect_error(rnormalt(c()), "Argument n must have length one.")
   expect_error(rnormalt(c(5, 10)), "Argument n must have length one.")
   expect_error(rnormalt("foo"), "Argument n must be numeric.")
-  expect_error(rnormalt(-10), "Argument n must be positive.")
+  expect_error(rnormalt(0), "Argument n must be positive.")
 })
 
 test_that("mu input checking works", {

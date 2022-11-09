@@ -103,9 +103,13 @@ for (mu in seq(.5, 3.5, 1)) {
     d3 <- round(pinvgaussalt(q, mu, sigma, TRUE, TRUE), 10)
     d4 <- round(ref_cdf(q, mu, sigma, TRUE, TRUE), 10)
 
+    d5 <- round(pinvgaussalt(q, mu, sigma, FALSE), 10)
+    d6 <- round(ref_cdf(q, mu, sigma, FALSE), 10)
+
     test_that("Test results of cdf", {
       expect_equal(d1, d2)
       expect_equal(d3, d4)
+      expect_equal(d5, d6)
     })
   }
 }
@@ -127,7 +131,7 @@ for (mu in seq(.5, 3.5, 1)) {
 ###############################################
 # cdf Input checking
 ###############################################
-test_that("x input checking works", {
+test_that("q input checking works", {
   expect_error(pinvgaussalt(c()), "Argument q must have positive length.")
   expect_error(pinvgaussalt(rep("foo", 50)), "Argument q must be numeric.")
   expect_error(pinvgaussalt(-1), NULL)
@@ -184,11 +188,11 @@ for (mu in seq(1, 3, 1)) {
 ###############################################
 # random number generator Input checking
 ###############################################
-test_that("x input checking works", {
+test_that("n input checking works", {
   expect_error(rinvgaussalt(c()), "Argument n must have length one.")
   expect_error(rinvgaussalt(c(5, 10)), "Argument n must have length one.")
   expect_error(rinvgaussalt("foo"), "Argument n must be numeric.")
-  expect_error(rinvgaussalt(-10), "Argument n must be positive.")
+  expect_error(rinvgaussalt(0), "Argument n must be positive.")
 })
 
 test_that("mu input checking works", {

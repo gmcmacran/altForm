@@ -67,9 +67,13 @@ for (mu in mus) {
   d3 <- round(ppoisalt(q, mu, TRUE, TRUE), 10)
   d4 <- round(ppois(q, mu, TRUE, TRUE), 10)
 
+  d5 <- round(ppoisalt(q, mu, FALSE), 10)
+  d6 <- round(ppois(q, mu, FALSE), 10)
+
   test_that("Test results of cdf", {
     expect_equal(d1, d2)
     expect_equal(d3, d4)
+    expect_equal(d5, d6)
   })
 }
 
@@ -85,23 +89,10 @@ for (mu in mus) {
   })
 }
 
-# Total area is 1.
-for (mu in mus) {
-  d1 <- ppoisalt(Inf, mu)
-
-  d3 <- ppoisalt(Inf, mu, TRUE, TRUE)
-
-  test_that("Test results of cdf", {
-    expect_equal(d1, 1)
-    expect_equal(d3, 0)
-  })
-}
-
-
 ###############################################
 # cdf Input checking
 ###############################################
-test_that("x input checking works", {
+test_that("q input checking works", {
   expect_error(ppoisalt(c()), "Argument q must have positive length.")
   expect_error(ppoisalt(rep("foo", 50)), "Argument q must be numeric.")
   expect_error(ppoisalt(rep(-10, 50)), "All elements in q must be greater than or equal to 0")
@@ -112,6 +103,8 @@ q <- rpois(100, mu)
 test_that("mu input checking works", {
   expect_error(ppoisalt(q, c(1, 2)), "Argument mu must have length one.")
   expect_error(ppoisalt(q, "foo"), "Argument mu must be numeric.")
+  expect_error(ppoisalt(q, 0), "Argument mu must be greater than 0")
+  expect_error(ppoisalt(q, 143), "Argument mu must be less than 143")
 })
 
 test_that("lower.tail input checking works", {
@@ -147,15 +140,16 @@ for (mu in seq(.25, 1.25, .25)) {
 ###############################################
 # random number generator Input checking
 ###############################################
-test_that("x input checking works", {
+test_that("n input checking works", {
   expect_error(rpoisalt(c()), "Argument n must have length one.")
   expect_error(rpoisalt(c(5, 10)), "Argument n must have length one.")
   expect_error(rpoisalt("foo"), "Argument n must be numeric.")
-  expect_error(rpoisalt(-10), "Argument n must be positive.")
+  expect_error(rpoisalt(0), "Argument n must be positive.")
 })
 
 test_that("mu input checking works", {
   expect_error(rpoisalt(10, c(1, 2)), "Argument mu must have length one.")
   expect_error(rpoisalt(10, "foo"), "Argument mu must be numeric.")
   expect_error(rpoisalt(10, 0), "Argument mu must be positive.")
+  expect_error(rpoisalt(10, 143), "Argument mu must be less than 143.")
 })

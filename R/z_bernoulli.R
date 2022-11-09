@@ -14,6 +14,16 @@
 #'
 #' @export
 dbernalt <- function(x, mu, log = FALSE) {
+  if (length(x) <= 0) {
+    stop("Argument x must have positive length.")
+  }
+  if (!is.numeric(x)) {
+    stop("Argument x must be numeric.")
+  }
+  if (any(x > 1)) {
+    stop("All elements in x must be less than or equal to 1")
+  }
+
   out <- dbinomalt(x, mu, 1, log)
   return(out)
 }
@@ -22,6 +32,16 @@ dbernalt <- function(x, mu, log = FALSE) {
 #' @inheritParams pnormalt
 #' @export
 pbernalt <- function(q, mu, lower.tail = TRUE, log.p = FALSE) {
+  if (length(q) <= 0) {
+    stop("Argument q must have positive length.")
+  }
+  if (!is.numeric(q)) {
+    stop("Argument q must be numeric.")
+  }
+  if (any(q > 1)) {
+    stop("All elements in q must be less than or equal to 1")
+  }
+
   out <- pbinomalt(q, mu, 1, lower.tail, log.p)
   return(out)
 }

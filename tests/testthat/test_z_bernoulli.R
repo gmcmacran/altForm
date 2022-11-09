@@ -29,6 +29,7 @@ test_that("x input checking works", {
   expect_error(dbernalt(c()), "Argument x must have positive length.")
   expect_error(dbernalt(rep("foo", 50)), "Argument x must be numeric.")
   expect_error(dbernalt(rep(-10, 50)), "All elements in x must be greater than or equal to 0")
+  expect_error(dbernalt(rep(2, 50)), "All elements in x must be less than or equal to 1")
 })
 
 set.seed(1)
@@ -63,9 +64,13 @@ for (mu in seq(.01, .99, .05)) {
   d3 <- round(pbernalt(q, mu, TRUE, TRUE), 10)
   d4 <- round(Rlab::pbern(q, mu, TRUE, TRUE), 10)
 
+  d5 <- round(pbernalt(q, mu, FALSE), 10)
+  d6 <- round(Rlab::pbern(q, mu, FALSE), 10)
+
   test_that("Test results of cdf", {
     expect_equal(d1, d2)
     expect_equal(d3, d4)
+    expect_equal(d5, d6)
   })
 }
 
@@ -86,10 +91,11 @@ for (mu in seq(.01, .99, .05)) {
 ###############################################
 # cdf Input checking
 ###############################################
-test_that("x input checking works", {
+test_that("q input checking works", {
   expect_error(pbernalt(c()), "Argument q must have positive length.")
   expect_error(pbernalt(rep("foo", 50)), "Argument q must be numeric.")
   expect_error(pbernalt(rep(-10, 50)), "All elements in q must be greater than or equal to 0")
+  expect_error(pbernalt(rep(2, 50)), "All elements in q must be less than or equal to 1")
 })
 
 set.seed(1)
@@ -97,6 +103,8 @@ q <- Rlab::rbern(100, .5)
 test_that("mu input checking works", {
   expect_error(pbernalt(q, c(1, 2)), "Argument mu must have length one.")
   expect_error(pbernalt(q, "foo"), "Argument mu must be numeric.")
+  expect_error(pbinomalt(q, 0), "Argument mu must be greater than 0")
+  expect_error(pbinomalt(q, 1), "Argument mu must be less than 1")
 })
 
 test_that("lower.tail input checking works", {
@@ -132,11 +140,11 @@ for (mu in seq(.01, .99, .05)) {
 ###############################################
 # random number generator Input checking
 ###############################################
-test_that("x input checking works", {
+test_that("n input checking works", {
   expect_error(rbernalt(c()), "Argument n must have length one.")
   expect_error(rbernalt(c(5, 10)), "Argument n must have length one.")
   expect_error(rbernalt("foo"), "Argument n must be numeric.")
-  expect_error(rbernalt(-10), "Argument n must be positive.")
+  expect_error(rbernalt(0), "Argument n must be positive.")
 })
 
 test_that("mu input checking works", {

@@ -74,9 +74,13 @@ for (mu in seq(.01, .99, .05)) {
     d3 <- round(pnbinomalt(q, mu, n, TRUE, TRUE), 10)
     d4 <- round(pnbinom(q = q, size = n, prob = mu, log.p = TRUE), 10)
 
+    d5 <- round(pnbinomalt(q, mu, n, FALSE), 10)
+    d6 <- round(pnbinom(q = q, size = n, prob = mu, lower.tail = FALSE), 10)
+
     test_that("Test results of cdf", {
       expect_equal(d1, d2)
       expect_equal(d3, d4)
+      expect_equal(d5, d6)
     })
   }
 }
@@ -98,7 +102,7 @@ for (mu in seq(.01, .99, .05)) {
 ###############################################
 # cdf Input checking
 ###############################################
-test_that("x input checking works", {
+test_that("q input checking works", {
   expect_error(pnbinomalt(c()), "Argument q must have positive length.")
   expect_error(pnbinomalt(rep("foo", 50)), "Argument q must be numeric.")
   expect_error(pnbinomalt(rep(-10, 50)), "All elements in q must be greater than or equal to 0")
@@ -109,6 +113,8 @@ q <- rnbinom(100, 10, .5)
 test_that("mu input checking works", {
   expect_error(pnbinomalt(q, c(1, 2)), "Argument mu must have length one.")
   expect_error(pnbinomalt(q, "foo"), "Argument mu must be numeric.")
+  expect_error(pnbinomalt(q, 0), "Argument mu must be greater than 0")
+  expect_error(pnbinomalt(q, 1), "Argument mu must be less than 1")
 })
 
 test_that("size input checking works", {
@@ -154,11 +160,11 @@ for (mu in seq(.05, .95, .05)) {
 ###############################################
 # random number generator Input checking
 ###############################################
-test_that("x input checking works", {
+test_that("n input checking works", {
   expect_error(rnbinomalt(c()), "Argument n must have length one.")
   expect_error(rnbinomalt(c(5, 10)), "Argument n must have length one.")
   expect_error(rnbinomalt("foo"), "Argument n must be numeric.")
-  expect_error(rnbinomalt(-10), "Argument n must be positive.")
+  expect_error(rnbinomalt(0), "Argument n must be positive.")
 })
 
 test_that("mu input checking works", {
