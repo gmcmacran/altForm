@@ -13,12 +13,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-# altForm
+## Overview
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-altForm provides alternative formulations of standard distributions. All functions are parameterized by $\mu$. $\sigma$ and size are included where appropriate. For some distributions, this is the typical parameterization (i.e. normal). For others, this parameterization is uncommon (i. e. gamma). All pdfs, pmfs, cdfs and cmfs are tested against the typical R functions.
+altForm provides alternative formulations of standard distributions by using the exponential form from generalized linear models. All functions are parameterized by $\mu$. $\sigma$ and size are included where appropriate. For some distributions, this is the typical parameterization (i.e. normal). For others, this parameterization is uncommon (i. e. gamma). All functions are tested against the typical R functions.
 
 * Bernoulli
   + pmf
@@ -39,27 +39,26 @@ altForm provides alternative formulations of standard distributions. All functio
   + pmf
   + cmf
   + random number generator
+  
+* Poisson 
+  + pmf
+  + cmf
+  + random number generator
 
 * Normal
   + pdf
   + cdf
   + random number generator
 
-* Poisson 
-  + pmf
-  + cmf
-  + random number generator
-
 * Gamma
   + pdf
-  + cdf
+  + cdf (Numerical integration is inaccurate for some parameters)
   + random number generator
   
 * Inverse Gaussian
   + pdf
   + cdf
   + random number generator
-
 
 ## Example
 
@@ -68,20 +67,34 @@ All random generators convert parameters and call R's typical random number gene
 ```{r example1}
 library(altForm)
 set.seed(1)
-x <- rgammaalt(n = 3, mu = 1, sigma = 2)
+x <- rinvgaussalt(n = 3, mu = 1, sigma = 2)
 ```
 
-All probability density functions rely on the exponential formulations.
+All probability density functions rely on the exponential formulation.
 
 ```{r example2}
-dgammaalt(x = x, mu = 1, sigma = 2)
+dinvgaussalt(x = x, mu = 1, sigma = 2)
 ```
 
 All cumulative density calculations rely on numerical integration of pdf functions instead of closed form formulas.
 
 ```{r example3}
-pgammaalt(q = x, mu = 1, sigma = 2)
+pinvgaussalt(q = x, mu = 1, sigma = 2)
 ```
+
+## Design Choices
+
+This package is an exploration of functional programming. All pdf functions are results of a single function factory. All cdf functions are results of an additional function factory that takes a pdf function as an arguments. The implementations for pmf functions and cmf functions are similar. 
+
+* Looking back, what are the advantages of this approach?
+  + Extreme code reuse.
+  + Easy to understand dependencies.
+  + Speed of implementation. All functions are one call to a function factory.
+  + Error checking at definition time.
+  
+* What are the disadvantages?
+  + Cutting edge compute speed cannot be achieved due to generality.
+  + Extremely high numerical accuracy cannot be achieved due to the numerical integration dependency.
 
 ## Installation
 
