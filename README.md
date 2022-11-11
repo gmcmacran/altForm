@@ -4,6 +4,10 @@
 ## Overview
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/gmcmacran/altForm/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gmcmacran/altForm/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/gmcmacran/altForm/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gmcmacran/altForm?branch=main)
 <!-- badges: end -->
 
 altForm provides alternative formulations of standard distributions by
@@ -86,8 +90,7 @@ are similar.
 - Looking back, what are the advantages of this approach?
   - Extreme code reuse.
   - Easy to understand dependencies.
-  - Speed of implementation. All functions are one call to a function
-    factory.
+  - Speed of implementation.
   - Error checking at definition time.
 - What are the disadvantages?
   - Cutting edge compute speed cannot be achieved due to generality.

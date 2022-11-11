@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 ## Overview
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/gmcmacran/altForm/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gmcmacran/altForm/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/gmcmacran/altForm/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gmcmacran/altForm?branch=main)
 <!-- badges: end -->
 
 altForm provides alternative formulations of standard distributions by using the exponential form from generalized linear models. All functions are parameterized by $\mu$. $\sigma$ and size are included where appropriate. For some distributions, this is the typical parameterization (i.e. normal). For others, this parameterization is uncommon (i. e. gamma). All functions are tested against the typical R functions.
@@ -89,7 +91,7 @@ This package is an exploration of functional programming. All pdf functions are 
 * Looking back, what are the advantages of this approach?
   + Extreme code reuse.
   + Easy to understand dependencies.
-  + Speed of implementation. All functions are one call to a function factory.
+  + Speed of implementation.
   + Error checking at definition time.
   
 * What are the disadvantages?
